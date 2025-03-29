@@ -1,0 +1,121 @@
+{
+    "name": "AI & ML Roadmap",
+    "subtopics": [
+        {
+            "name": "Mathematics Fundamentals",
+            "subtopics": [
+                {
+                    "name": "Linear Algebra"
+                },
+                {
+                    "name": "Calculus"
+                },
+                {
+                    "name": "Probability & Statistics"
+                },
+                {
+                    "name": "Discrete Mathematics"
+                }
+            ]
+        },
+        {
+            "name": "Programming",
+            "subtopics": [
+                {
+                    "name": "Python Basics"
+                },
+                {
+                    "name": "Data Structures & Algorithms"
+                },
+                {
+                    "name": "Libraries: NumPy, Pandas, Matplotlib, Scikit-learn"
+                }
+            ]
+        },
+        {
+            "name": "Machine Learning Fundamentals",
+            "subtopics": [
+                {
+                    "name": "Supervised Learning (Regression, Classification)"
+                },
+                {
+                    "name": "Unsupervised Learning (Clustering, Dimensionality Reduction)"
+                },
+                {
+                    "name": "Model Evaluation & Selection"
+                },
+                {
+                    "name": "Feature Engineering"
+                },
+                {
+                    "name": "Regularization Techniques"
+                }
+            ]
+        },
+        {
+            "name": "Deep Learning",
+            "subtopics": [
+                {
+                    "name": "Neural Networks Basics"
+                },
+                {
+                    "name": "Convolutional Neural Networks (CNNs)"
+                },
+                {
+                    "name": "Recurrent Neural Networks (RNNs)"
+                },
+                {
+                    "name": "Transformers"
+                },
+                {
+                    "name": "Deep Learning Frameworks: TensorFlow, PyTorch"
+                }
+            ]
+        },
+        {
+            "name": "Data Engineering",
+            "subtopics": [
+                {
+                    "name": "Data Collection & Preprocessing"
+                },
+                {
+                    "name": "Data Warehousing & Databases (SQL, NoSQL)"
+                },
+                {
+                    "name": "Big Data Technologies (Spark, Hadoop)"
+                }
+            ]
+        },
+        {
+            "name": "Advanced Topics (Choose one or more)",
+            "subtopics": [
+                {
+                    "name": "Natural Language Processing (NLP)"
+                },
+                {
+                    "name": "Computer Vision"
+                },
+                {
+                    "name": "Reinforcement Learning"
+                },
+                {
+                    "name": "Generative Models (GANs, VAEs)"
+                }
+            ]
+        },
+        {
+            "name": "Deployment & Production",
+            "subtopics": [
+                {
+                    "name": "Model Deployment (REST APIs, Cloud Platforms)"
+                },
+                {
+                    "name": "Model Monitoring & Maintenance"
+                },
+                {
+                    "name": "Version Control (Git)"
+                }
+            ]
+        }
+    ]
+}
