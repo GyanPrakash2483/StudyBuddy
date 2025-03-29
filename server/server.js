@@ -41,7 +41,7 @@ app.use(
 
 // Basic route to confirm the server is running
 app.get('/', (req, res) => {
-  res.send('Study Point Hub API is running...');
+  res.send('Studybuddy  API is running...');
 });
 
 // Start the server
