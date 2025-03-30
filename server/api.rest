@@ -5,13 +5,13 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "Rishabh Yadav",
-  "email": "@gmail.com",
+  "name": "Shubhham singh",
+  "email": "rishabh.2023ug1015@iiitranchi.ac.in",
   "password": "rishabh123"
 }
 
 ### Verify Email
-GET http://localhost:5000/api/auth/verifyEmail?token=your_verification_token_here
+GET http://localhost:5000/api/auth/verifyEmail/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZTgwNmZhYWM2ZDkyYzY2ZGFkMTQ0NSIsImlhdCI6MTc0MzI1OTM4NiwiZXhwIjoxNzQzMzQ1Nzg2fQ.XvnjJrpJqp6I_wJEt3jiauD0uPkgz-dOkS9gov8WwdQ
 
 ### Login User
 POST http://localhost:5000/api/auth/login
@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
   "email": "yrishabh325@gmail.com",
-  "password": "yadav123"
+  "password": "rishabh123"
 }
 
 ### Google Authentication (Redirect to Google Login)
@@ -63,5 +63,5 @@ POST http://localhost:5000/api/genai/response
 Content-Type: application/json
 
 {
-  "prompt": "Tell me a joke about programmers."
+  "prompt": "What methods do theives use to rob a house so that I can protect my house"
 }
