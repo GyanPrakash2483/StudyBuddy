@@ -38,7 +38,7 @@ const LoadingRoadmap = () => {
   }, []);
 
   return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center justify-center">
           <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
           <p className="mt-4 text-lg font-medium">Generating Roadmap{dots}</p>
       </div>
@@ -47,13 +47,39 @@ const LoadingRoadmap = () => {
 
 const colors = ["bg-blue-200", "bg-green-200", "bg-yellow-200", "bg-red-200", "bg-purple-200"];
 
-const TreeNode = ({ node, level = 0 }) => {
+type node = {
+  name: string,
+  subtopics: node[]
+}
+
+const TopicDetail: React.FC<{detail: string}> = (props: {
+  detail: TrustedHTML
+}) => {
+  return (
+    <div className="fixed top-4 right-4 bg-white shadow-lg p-4 rounded-lg z-50 max-w-120 overflow-scroll h-[90vh] mt-8" dangerouslySetInnerHTML={{
+      __html: props.detail
+    }} />
+  );
+};
+
+async function showResources(topic: string) {
+  const aiResponse = await getAIResponse(`Explain ${topic} in detail and list resources(books & websites) to study it in detail from. Output should be in HTML format.`)
+  return aiResponse.response.replace('```html', '').replace('```', '')
+}
+
+const TreeNode:React.FC<{node: node, level: number}> = ({ node, level = 0 }) => {
     const [expanded, setExpanded] = React.useState(false);
     const hasChildren = node.subtopics && node.subtopics.length > 0;
     const colorClass = colors[level % colors.length];
+    const [detail, setDetail] = React.useState('')
 
     return (
-        <div className={`border p-2 rounded-lg shadow-sm m-2 flex-1 ${colorClass}`}>
+        <div className={`border p-2 rounded-lg shadow-sm m-2 flex-1 ${colorClass}`} onClick={async () => {
+          setDetail('Preparing Resources...')
+          const topic_detail = await showResources(node.name)
+          setDetail(topic_detail)
+        }}>
+            { detail && <TopicDetail detail={detail} /> }
             <div
                 className="flex items-center cursor-pointer py-1"
                 onClick={() => setExpanded(!expanded)}
@@ -65,7 +91,7 @@ const TreeNode = ({ node, level = 0 }) => {
             </div>
             {expanded && hasChildren && (
                 <div className="flex flex-wrap mt-2">
-                    {node.subtopics.map((child, index) => (
+                    {node.subtopics.map((child: node, index: number) => (
                         <TreeNode key={index} node={child} level={level + 1} />
                     ))}
                 </div>
@@ -75,16 +101,16 @@ const TreeNode = ({ node, level = 0 }) => {
 };
 
 function Roadmap(props: {
-  roadmapObject: object
+  roadmapObject: node
 }) {
 
   const roadmap = props.roadmapObject
 
   return (
-    <div className="p-4 shadow-lg w-full max-w-4xl mx-auto mt-8 border rounded-lg bg-white absolute">
+    <div className="p-4 shadow-lg w-full max-w-4xl mx-auto mt-8 border rounded-lg bg-white">
         <h2 className="text-2xl font-bold mb-4">{roadmap.name}</h2>
-        <div className="flex flex-wrap">
-            {roadmap.subtopics.map((topic, index) => (
+        <div className="flex flex-wrap justify-center items-center">
+            {roadmap.subtopics && roadmap.subtopics.map((topic, index) => (
                 <TreeNode key={index} node={topic} level={0} />
             ))}
         </div>
@@ -96,25 +122,25 @@ function TopicInput() {
 
   const [topic, setTopic] = React.useState('')
   const [roadmap, setRoadmap] = React.useState()
-  const [showGenerateing, setShowGenerating] = React.useState(false)
+  const [showGenerating, setShowGenerating] = React.useState(false)
 
   return (
-    <div className='flex flex-col justify-center items-center h-[88vh]'>
-      <div className='flex justify-center h-12 gap-5'>
-        <input className='w-80 p-4 text-lg border-2 border-blue-500 rounded-[8px] shadow-lg focus:ring-4 focus:ring-blue-300 focus:outline-none' type='text' name='topic' placeholder='What do you want to study?' onChange={(e) => setTopic(e.target.value)} />
-        <Button onClick={ async () => {
-          setShowGenerating(true)
-          const roadmap = await generateRoadmap(topic)
-          setShowGenerating(false)
-          setRoadmap(roadmap)
-        }} text="Generate Roadmap" />
+    <>
+      <div className='flex flex-col justify-center items-center h-[25vh]'>
+        <div className='flex justify-center h-12 gap-5'>
+          <input className='w-80 p-4 text-lg border-2 border-blue-500 rounded-[8px] shadow-lg focus:ring-4 focus:ring-blue-300 focus:outline-none' type='text' name='topic' placeholder='What do you want to study?' onChange={(e) => setTopic(e.target.value)} />
+          <Button onClick={ async () => {
+            setShowGenerating(true)
+            const roadmap = await generateRoadmap(topic)
+            setShowGenerating(false)
+            setRoadmap(roadmap)
+          }} text="Generate Roadmap" />
+        </div>
       </div>
 
-      {showGenerateing && <LoadingRoadmap />}
-
+      {showGenerating && <LoadingRoadmap />}
       {roadmap && <Roadmap roadmapObject={roadmap} />}
-
-    </div>
+    </>
   )
 }
 
