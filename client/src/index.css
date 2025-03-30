@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: white;
+}
+
+h3 {
+    color: white;
+}
+
+code {
+    font-family: "Fira Code", monospace; /* Use a coding font */
+    background-color: #1e1e1e; /* Dark background */
+    color: #d4d4d4; /* Light text for contrast */
+    padding: 4px 8px; /* Spacing */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 0.95rem; /* Slightly smaller font */
+    white-space: pre-wrap; /* Prevents overflow */
+}
+
+a {
+    color: rgb(10, 72, 187)
+}
